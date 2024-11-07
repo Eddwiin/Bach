@@ -1,0 +1,28 @@
+{
+  "name": "bach",
+  "version": "1.0.0",
+  "description": "Listen your musics with Bach",
+  "main": "main.js",
+  "scripts": {
+    "start:react": "BROWSER=none npm --prefix web start",
+    "start:electron": "electron .",
+    "start": "concurrently \"npm run start:react\" \"wait-on http://localhost:3000 && npm run start:electron\"",
+    "dist": "electron-builder"
+  },
+  "author": "Maguran",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.1.0",
+    "electron-builder": "^25.1.8",
+    "electron-is-dev": "^3.0.1",
+    "sass": "^1.80.6",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.example.myapp",
+    "productName": "My Electron App",
+    "directories": {
+      "output": "dist"
+    }
+  }
+}
