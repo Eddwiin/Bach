@@ -5,17 +5,15 @@ import appRouter from './config/router.config';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider 
+    <RouterProvider
       future={{
-        v7_startTransition: true,
+        v7_startTransition: true
       }}
-      router={appRouter}  
+      router={appRouter}
     />
   </React.StrictMode>
 );

@@ -1,7 +1,3 @@
 export default function LogIn() {
-    return (
-        <div>
-            Log in works!
-        </div>
-    )
+  return <div>Log in works!</div>;
 }
