@@ -2,7 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import App from '../App';
 import Auth from '../pages/auth/Auth';
 import LogIn from '../pages/auth/log-in/Log-in';
-import SignUp from '../pages/auth/sign-up/sign-up';
+import SignUp from '../pages/auth/sign-up/Sign-up';
 
 export const ROUTE_PATH = {
   DEFAULT: '/',

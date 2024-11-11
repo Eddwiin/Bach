@@ -4,15 +4,18 @@ import { PropsWithRequiredChildren } from '../../helpers/customer-props.helper';
 export default function Button(props: PropsWithRequiredChildren<ButtonProps>) {
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-      type={props.type}>
+      className={
+        `text-white font-bold py-2 px-4 rounded-full` +
+        ` ${props.buttonAttributes.disabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700 '}`
+      }
+      {...props.buttonAttributes}>
       {props.children}
     </button>
   );
 }
 
-type ButtonType = Extract<ButtonHTMLAttributes<HTMLButtonElement>['type'], string>;
+type ButtonAttributes = Extract<ButtonHTMLAttributes<HTMLButtonElement>, unknown>;
 
 interface ButtonProps {
-  type: ButtonType;
+  buttonAttributes: ButtonAttributes;
 }
