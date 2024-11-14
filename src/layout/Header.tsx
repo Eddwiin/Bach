@@ -1,5 +1,5 @@
 import { ROUTE_PATH } from '../config/router.config';
-import LinkTo from './../UI/link-to/Link-to';
+import LinkTo from '../UI/link-to/Link-to';
 
 export default function Header() {
   return (
