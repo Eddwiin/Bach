@@ -29,7 +29,6 @@ export default function SignUp() {
   } = useErrorValidationMessage();
 
   const onCreateAccount = () => {
-    (window as any).electron.doThing();
     console.log("ON CREATE ACCOUNT");
   };
 
