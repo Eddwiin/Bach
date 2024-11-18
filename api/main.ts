@@ -1,14 +1,17 @@
-import { serve } from 'https://deno.land/std@0.136.0/http/server.ts'
+// @deno-types="npm:@types/express@4.17.15"
+import "jsr:@std/dotenv/load";
+import express, { json } from "npm:express@4.18.2";
+import { ROUTE_PATH } from "./config/route-path.Config.ts";
+import errorHandler from "./middlewares/error-handler.middleware.ts";
+import authRouter from "./routes/auth.route.ts";
 
-function requestHandler() {
-  const body = JSON.stringify({ message: 'I change my response' })
+const PORT = Deno.env.get("PORT") || 8000;
+const app = express();
 
-  return new Response(body, {
-    status: 201,
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
-}
+app.use(json())
 
-serve(requestHandler, { port: 5000 })
+app.use(ROUTE_PATH.AUTH.DEFAULT, authRouter)
+app.use(errorHandler)
+
+app.listen(PORT);
+
