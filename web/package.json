@@ -6,7 +6,7 @@
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
-    "dev:react": "vite",
+    "dev:react": "NODE_ENV='development' vite",
     "dev:electron": "npm run build:electron && cross-env NODE_ENV=development electron .",
     "build:react": "tsc -b && vite build",
     "lint": "eslint .",

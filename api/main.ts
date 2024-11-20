@@ -1,17 +1,18 @@
-// @deno-types="npm:@types/express@4.17.15"
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { Application } from "jsr:@oak/oak";
 import "jsr:@std/dotenv/load";
-import express, { json } from "npm:express@4.18.2";
-import { ROUTE_PATH } from "./config/route-path.Config.ts";
-import errorHandler from "./middlewares/error-handler.middleware.ts";
-import authRouter from "./routes/auth.route.ts";
+import { getAppRouter } from "./config/router.ts";
 
 const PORT = Deno.env.get("PORT") || 8000;
-const app = express();
+const router = getAppRouter();
+const app = new Application();
 
-app.use(json())
+app.use(oakCors({
+    origin: "http://localhost:5173",
+    optionsSuccessStatus: 200,
+    methods: "POST, OPTIONS",
+}),);
 
-app.use(ROUTE_PATH.AUTH.DEFAULT, authRouter)
-app.use(errorHandler)
-
-app.listen(PORT);
-
+app.use(router.routes());
+app.use(router.allowedMethods());
+app.listen({ port: PORT })

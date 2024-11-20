@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import useErrorValidationMessage from "../../../hooks/error-validation-message.hook";
 import Button from "../../../UI/button/Button";
 import FormGroup from "../../../UI/form-group/FormGroup";
+import { UserSignInModel } from "../context/auth-provider/auth.provider.context";
+import useAuthServiceContext from "../context/auth-provider/auth.provider.hook";
 
 const FORM_SIGNUP_IDS = {
   firstName: "firstName",
@@ -28,8 +30,17 @@ export default function SignUp() {
     getErrorMessageForRegexPasswordNotMatch,
   } = useErrorValidationMessage();
 
-  const onCreateAccount = () => {
-    console.log("ON CREATE ACCOUNT");
+  const { signUp } = useAuthServiceContext();
+
+  const onCreateAccount = (data: FormValue) => {
+    const userToSave: UserSignInModel = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+
+    signUp(userToSave).then((res) => console.log("USER SAVED: ", res));
   };
 
   return (

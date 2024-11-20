@@ -1,7 +1,7 @@
 export const ROUTE_PATH = {
     AUTH: {
         DEFAULT: '/auth',
-        SIGNUP: '/sign-up',
-        LOGIN: '/login'
+        SIGNUP: '/auth/sign-up',
+        LOGIN: '/auth/login'
     }
 } as const;
