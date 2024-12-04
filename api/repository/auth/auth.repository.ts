@@ -1,7 +1,9 @@
 import { UserSignUpPayload } from "../../controllers/auth/auth.controller.ts";
 import { UserModel } from "../../models/user.model.ts";
 import { IAuthRepository } from "./auth.repository.interface.ts";
+import { injectable } from "inversify";
 
+@injectable()
 export class AuthRepository implements IAuthRepository {
     findUserByEmail(email: string): UserModel {
         throw new Error("Method not implemented.");

@@ -3,14 +3,17 @@ import { UserModel } from "../../models/user.model.ts";
 import { IAuthRepository } from "../../repository/auth/auth.repository.interface.ts";
 import { AuthRepository } from "../../repository/auth/auth.repository.ts";
 import { IAuthService } from "./auth.service.interface.ts";
-import { Injectable } from "https://nest.land/package/di";
+import { injectable } from "inversify";
 
-@Injectable()
+@injectable()
 export class AuthService implements IAuthService {
     private readonly authRepository: IAuthRepository;
 
     constructor() {
         this.authRepository = new AuthRepository();
+    }
+    helloAuthService(): void {
+        console.log("SALUT AUTH SERVICE")
     }
 
     findUserByEmail(email: string): UserModel {
