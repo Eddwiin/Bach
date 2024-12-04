@@ -1,20 +1,21 @@
 import { RouterContext } from "@oak/oak/router";
-import { ROUTE_PATH } from '../../config/route-path.config.ts';
+import { ROUTE_PATH } from '../../config/routes/route-path.config.ts';
 import { UserModel } from "../../models/user.model.ts";
 import { AuthService } from '../../services/auth/auth.service.ts';
+import { IAuthService } from "../../services/auth/auth.service.interface.ts";
 
 type SignUpRouterContext = RouterContext<typeof ROUTE_PATH.AUTH.SIGNUP>;
 export type UserSignUpPayload = Pick<UserModel, "firstName" | "lastName" | "email" | "password">
 
 export class AuthController {
-    // private readonly authService: IAuthService;
+    // Voir l'injection de dependance plus tard
+    private readonly _authService: IAuthService;
 
     constructor(private readonly authService: AuthService) {
-        // this.authService = new AuthService();
+        this._authService = new AuthService();
     }
 
     async signUp(context: SignUpRouterContext) {
-        console.log("AUTH SERVICE", this.authService)
         const userPayload = await context.request.body.json();
 
         if (!this.instanceOfUserSignUpPayload(userPayload))
