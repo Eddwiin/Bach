@@ -8,7 +8,7 @@ export interface UserModel {
   updatedAt: Date;
 }
 
-export type UserSignUpPayload = Pick<
+export type CreateUserDto = Pick<
   UserModel,
   'firstName' | 'lastName' | 'email' | 'password'
 >;

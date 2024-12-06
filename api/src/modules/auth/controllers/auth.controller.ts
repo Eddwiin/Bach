@@ -1,7 +1,14 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Inject,
+  Post,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { AUTH_SERVICE_TOKEN } from '../services/auth.service';
 import { IAuthService } from '../services/auth.service.interface';
-import { UserSignUpPayload } from '../models/user.model';
+import { CreateUserDto } from '../models/user.model';
 
 @Controller('auth')
 export class AuthController {
@@ -14,16 +21,23 @@ export class AuthController {
   }
 
   @Post('sign-up')
-  signUp(@Body() userPayload: UserSignUpPayload) {
-    if (!this.instanceOfUserSignUpPayload(userPayload))
+  @HttpCode(201)
+  async signUp(@Body() createUserDto: CreateUserDto) {
+    if (!this.instanceOfCreateUserDto(createUserDto))
       throw new Error('User payload is empty or not correct');
 
-    this.authService.saveUser(userPayload);
+    const userToSave = await this.authService.saveUser(createUserDto);
+
+    if (!userToSave) {
+      throw new InternalServerErrorException('Failed to save user');
+    }
+
+    return { message: 'User successfully created' };
   }
 
-  private instanceOfUserSignUpPayload(
-    payload: UserSignUpPayload,
-  ): payload is UserSignUpPayload {
+  private instanceOfCreateUserDto(
+    payload: CreateUserDto,
+  ): payload is CreateUserDto {
     return (
       payload &&
       typeof payload === 'object' &&
