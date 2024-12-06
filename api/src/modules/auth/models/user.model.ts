@@ -7,8 +7,3 @@ export interface UserModel {
   createAt: Date;
   updatedAt: Date;
 }
-
-export type CreateUserDto = Pick<
-  UserModel,
-  'firstName' | 'lastName' | 'email' | 'password'
->;

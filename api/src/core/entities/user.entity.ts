@@ -1,22 +1,31 @@
-import { Column, Model, Table, PrimaryKey, Unique } from 'sequelize-typescript';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Table({
-  tableName: 'user',
-})
-export class UserEntity extends Model {
-  @PrimaryKey
+@Entity()
+export class UserEntity {
+  @PrimaryGeneratedColumn()
   id: string;
-  @Column
+
+  @Column()
   firstName: string;
-  @Column
+
+  @Column()
   lastName: string;
-  @Column
-  @Unique
+
+  @Column()
   email: string;
-  @Column
+
+  @Column()
   password: string;
-  @Column
+
+  @CreateDateColumn()
   createAt: Date;
-  @Column
+
+  @UpdateDateColumn()
   updatedAt: Date;
 }

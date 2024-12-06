@@ -5,11 +5,11 @@ import {
   AUTH_REPOSITORY_TOKEN,
   AuthRepository,
 } from './repositories/auth.repository';
-import { SequelizeModule } from '@nestjs/sequelize';
 import { UserEntity } from 'src/core/entities/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [SequelizeModule.forFeature([UserEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [AuthController],
   providers: [
     {

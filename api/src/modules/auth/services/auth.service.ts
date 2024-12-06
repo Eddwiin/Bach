@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IAuthService } from './auth.service.interface';
-import { UserModel, CreateUserDto } from '../models/user.model';
+import { UserModel } from '../models/user.model';
 import { IAuthRepository } from '../repositories/auth.repository.interface';
 import { AUTH_REPOSITORY_TOKEN } from '../repositories/auth.repository';
+import { CreateUserDto } from '../dtos/create-user.dto';
 
 export const AUTH_SERVICE_TOKEN = 'AUTH_SERVICE_TOKEN';
 
@@ -23,6 +24,6 @@ export class AuthService implements IAuthService {
   }
 
   findUserByEmail(email: string): Promise<UserModel> {
-    throw new Error('Method not implemented.');
+    return this.authRepository.findUserByEmail(email);
   }
 }
