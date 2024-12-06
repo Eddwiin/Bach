@@ -7,11 +7,9 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:react": "NODE_ENV='development' vite",
-    "dev:electron": "npm run build:electron && cross-env NODE_ENV=development electron .",
     "build:react": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "build:electron": "tsc --project src/electron/tsconfig.json"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -27,7 +25,6 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "cross-env": "^7.0.3",
-    "electron": "^33.2.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
