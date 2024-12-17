@@ -1,11 +1,13 @@
-import { useForm } from 'react-hook-form';
-import FormGroup from '../../../UI/form-group/FormGroup';
-import Button from '../../../UI/button/Button';
-import useErrorValidationMessage from '../../../hooks/error-validation-message.hook';
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import Button from "../../../UI/button/Button";
+import FormGroup from "../../../UI/form-group/FormGroup";
+import { ROUTE_PATH } from "../../../config/router.config";
+import useErrorValidationMessage from "../../../hooks/error-validation-message.hook";
 
 const FORM_LOGIN_IDS = {
-  email: 'email',
-  password: 'password'
+  email: "email",
+  password: "password",
 } as const;
 
 type FormValue = typeof FORM_LOGIN_IDS;
@@ -14,13 +16,15 @@ export default function LogIn() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm<FormValue>({
-    mode: 'onChange'
+    mode: "onChange",
   });
 
-  const { getErrorMessageForRequiredField, getErrorMessageForRegexPasswordNotMatch } =
-    useErrorValidationMessage();
+  const {
+    getErrorMessageForRequiredField,
+    getErrorMessageForRegexPasswordNotMatch,
+  } = useErrorValidationMessage();
 
   const onLogin = () => {};
 
@@ -30,58 +34,67 @@ export default function LogIn() {
         <FormGroup
           labelText="Email"
           labelProps={{
-            htmlFor: `${FORM_LOGIN_IDS.email}`
+            htmlFor: `${FORM_LOGIN_IDS.email}`,
           }}
           inputProps={{
             inputAttributes: {
               id: `${FORM_LOGIN_IDS.email}`,
-              name: 'email',
-              type: 'email'
+              name: "email",
+              type: "email",
             },
             register: {
               ...register(FORM_LOGIN_IDS.email, {
                 required: true,
                 pattern: {
                   value: /\S+@\S+\.\S+/,
-                  message: 'Entered value does not match email format'
-                }
-              })
+                  message: "Entered value does not match email format",
+                },
+              }),
             },
-            formErrorMessage: getErrorMessageForRequiredField(errors.email) || errors.email?.message
+            formErrorMessage:
+              getErrorMessageForRequiredField(errors.email) ||
+              errors.email?.message,
           }}
         />
 
         <FormGroup
           labelText="Password"
           labelProps={{
-            htmlFor: `${FORM_LOGIN_IDS.password}`
+            htmlFor: `${FORM_LOGIN_IDS.password}`,
           }}
           inputProps={{
             inputAttributes: {
               id: `${FORM_LOGIN_IDS.password}`,
-              name: 'password',
-              type: 'password'
+              name: "password",
+              type: "password",
             },
             register: {
               ...register(FORM_LOGIN_IDS.password, {
                 required: true,
                 minLength: {
                   value: 5,
-                  message: 'min length is 5'
-                }
-              })
+                  message: "min length is 5",
+                },
+              }),
             },
             formErrorMessage:
               getErrorMessageForRequiredField(errors.password) ||
-              getErrorMessageForRegexPasswordNotMatch(errors.password)
+              getErrorMessageForRegexPasswordNotMatch(errors.password),
           }}
         />
 
+        <div>
+          <Link to={`${ROUTE_PATH.AUTH}/${ROUTE_PATH.FORGOT_PASSWORD}`}>
+            Forgot password?
+          </Link>
+        </div>
+
         <Button
           buttonAttributes={{
-            type: 'submit',
-            disabled: !isValid
-          }}>
+            type: "submit",
+            disabled: !isValid,
+          }}
+        >
           Login
         </Button>
       </form>
